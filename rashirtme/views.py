@@ -4,15 +4,17 @@ Django views for rashirtme project.
 """
 
 from django.shortcuts import render
-from django.http.response import HttpResponse
+from django.http.response import HttpResponse, HttpResponseNotFound
+from rashirtme.apps.shop.forms import OrderForm
+from django.conf import settings
 
 
 def home(request):
     """    Display the Landing Page    """
 
     context = {
-        'stripe_publishable_key': 'pk_test_qZ3TjohtOSXEeXhPubJgY64y',
-        'shirt_price': '20',
+        'stripe_publishable_key': settings.STRIPE_PUBLIC_KEY,
+        'shirt_price': settings.SHIRT_PRICE,
     }
 
     return render(request, 'home.html', context)
@@ -21,6 +23,11 @@ def home(request):
 def process_order(request):
     """    Process the Incoming Order    """
 
-    print request.POST
+    form = OrderForm(data=request.POST or None, files=request.FILES or None)
 
-    return HttpResponse('Working!')
+    if form.is_valid():
+        form.save()
+        return HttpResponse('Success!\n')
+    else:
+        print form.errors
+        return HttpResponseNotFound('Working!')

@@ -221,6 +221,7 @@ $(function() {
       var data = { stripe_token: token.id };
       data.name = fields.billing_name;
       data.address_line_1 = fields.billing_address_line1;
+      data.address_line_2 = fields.billing_address_line2;
       data.address_city = fields.billing_address_city;
       data.address_state = fields.billing_address_state;
       data.address_zip = fields.billing_address_zip;
