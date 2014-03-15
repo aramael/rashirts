@@ -390,7 +390,7 @@ $(function() {
           price: price,
           size: size,
           quantity: 1,
-          color: 'G'
+          color: 'B'
         });
       });
 

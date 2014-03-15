@@ -1,5 +1,6 @@
 import stripe
 import logging
+import json
 
 from .models import Order
 from django import forms
@@ -55,14 +56,19 @@ class OrderForm(forms.ModelForm):
 
         data['email'] = token.email
 
+        shirts = 0
+        for item in json.loads(data['order']):
+            print item
+            shirts += int(item['quantity'])
+
+        data['amount_due'] = shirts * settings.SHIRT_PRICE*100
+
         try:
             # Credit Card Processing
             customer = stripe.Customer.create(description=data['name'],
                                               email=data['email'], card=token)
 
             data['stripe_customer'] = customer.id
-
-            data['amount_due'] = settings.SHIRT_PRICE*100
 
             # Authorize the Charge but DO NOT CHARGE in case there is an error
             charge = stripe.Charge.create(description=data['name'] + ' <' + data['email'] + ' > - Shop RA Shirt Order',
