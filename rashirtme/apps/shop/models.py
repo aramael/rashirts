@@ -124,7 +124,7 @@ class Order(models.Model):
             'email': self.email,
             'name': self.name,
             'date': self.purchase_time,
-            #'price': ch.amount/100.00,
+            'price': ch.amount/100.00,
             'order_pretty': self.order_pretty(),
         }
 

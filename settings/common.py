@@ -56,7 +56,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'south',
     'gunicorn',
-    'djrill',
     'rashirtme.apps.shop',
 )
 
