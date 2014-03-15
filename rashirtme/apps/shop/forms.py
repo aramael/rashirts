@@ -7,6 +7,11 @@ from django import forms
 from django.conf import settings
 from django.db import transaction
 
+try:
+    from django.utils.timezone import now as datetime_now
+except ImportError:
+    import datetime
+    datetime_now = datetime.datetime.now
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
@@ -100,5 +105,6 @@ class OrderForm(forms.ModelForm):
             ch.capture()
 
             self.instance.amount_due -= ch.amount
+            self.instance.purchase_time = datetime_now()
 
             super(OrderForm,self).save(*args, **kwargs)
