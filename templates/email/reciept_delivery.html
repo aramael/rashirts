@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ subject }}</title>
+</head>
+<body>
+
+Dear {{ name }}:
+
+This is a receipt for your recent purchase for an Unofficial 2013-2014 RA
+Shirt. This is only a receipt, no payment is due. If you have any
+questions, please contact us anytime at <a href="mailto:shop@rashirt.mem">shop@rashirt.me</a>. Thank you
+for your business!
+
+-------------------------------------------------
+RA Shirt Me RECEIPT - {{ date|date:"d M Y - H:Mi" }}
+
+Name: {{ name }}
+Plan: {{ order_pretty }}
+Amount: USD ${{ price }}*
+
+
+RA Shirt Me, Inc.
+2828 Broadway
+New York, NY 10025
+
+* EU customers: prices exclude VAT
+-------------------------------------------------
+
+</body>
+</html>

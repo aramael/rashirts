@@ -2,7 +2,9 @@ import stripe
 import json
 
 from django.conf import settings
+from django.core.mail import EmailMultiAlternatives
 from django.db import models
+from django.template import loader
 
 # Setup Stripe API
 stripe.api_key = settings.STRIPE_PRIVATE_KEY
@@ -53,6 +55,7 @@ class Order(models.Model):
         return order
     order_pretty.allow_tags = True
     order_pretty.short_description = 'Order'
+    order_pretty = property(order_pretty)
 
     def shirt_count(self):
 
@@ -70,3 +73,45 @@ class Order(models.Model):
         ch = stripe.Charge.retrieve(self.stripe_token)
         ch.refund()
         self.save()
+
+    def mail_customer(self, subject, body):
+        msg = EmailMultiAlternatives(subject, '', None, [self.email, ])
+        msg.attach_alternative(body, "text/html")
+        msg.track_opens = True
+        msg.track_clicks = True
+        msg.auto_text = True
+        msg.send()
+
+    def receipt_email_message(self, subject_template='email/receipt_delivery_subject.txt',
+                              email_template='email/invite_email.html', extra_context=None):
+
+        ch = stripe.Charge.retrieve(self.stripe_token)
+
+        context = {
+            'email': self.email,
+            'name': self.name,
+            'date': self.purchase_time,
+            'price': ch.amount/100.00,
+            'order_pretty': self.order_pretty,
+        }
+
+        if extra_context is not None:
+            context.update(extra_context)
+
+        subject = loader.render_to_string(subject_template, context)
+        # Email subject *must not* contain newlines
+        subject = ''.join(subject.splitlines())
+
+        context.update({'subject': subject})
+
+        email = loader.render_to_string(email_template, context)
+
+        return subject, email
+
+    def send_receipt(self, *args, **kwargs):
+        """
+        Send out an email customer with a receipt for the purchase.
+        """
+
+        subject, email = self.receipt_email_message(*args, **kwargs)
+        self.mail_customer(subject, email)
