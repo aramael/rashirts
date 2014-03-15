@@ -44,6 +44,10 @@ STRIPE_PRIVATE_KEY = os.environ['STRIPE_PRIVATE_KEY']
 # Email Support w/ Heroku & Mandrill
 #==============================================================================
 
+INSTALLED_APPS += (
+    'djrill',
+)
+
 # Set it by issuing following command
 # <code>
 # heroku config:add MANDRILL_API_KEY=''
