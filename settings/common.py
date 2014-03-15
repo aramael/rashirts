@@ -56,6 +56,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'south',
     'gunicorn',
+    'djrill',
     'rashirtme.apps.shop',
 )
 
@@ -151,8 +152,6 @@ MIDDLEWARE_CLASSES = (
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'rashirtme.wsgi.application'
 
-STRIPE_PUBLIC_KEY = 'pk_test_Phk6HyD4yTpTWu2P8RhEbw19'
-STRIPE_PRIVATE_KEY = 'sk_test_2iquld5gNH9ZIDfGbT86U9oE'
 SHIRT_PRICE = 20
 
 #==============================================================================
