@@ -221,6 +221,7 @@ $(function() {
       var data = { stripe_token: token.id };
       data.name = fields.billing_name;
       data.address_line_1 = fields.billing_address_line1;
+      data.address_line_2 = fields.billing_address_line2;
       data.address_city = fields.billing_address_city;
       data.address_state = fields.billing_address_state;
       data.address_zip = fields.billing_address_zip;
@@ -248,9 +249,9 @@ $(function() {
           $messageIcon.removeClass().addClass('icon success');
 
           $messageTitle.text('T-shirt ordered!');
-          $messageSubline.html("We'll send you an e-mail once it has been" +
-            ' shipped. If you have any questions, get in touch at' +
-            ' <a href="mailto:shop@example.com">shop@example.com</a>.');
+          $messageSubline.html("We'll send you an e-mail once you can pick" +
+            ' your order up. If you have any questions, get in touch at' +
+            ' <a href="mailto:shop@rashirt.mem">shop@rashirt.me</a>.');
 
           // show modal again in case it was closed
           fadeMessageModalIn();
@@ -267,9 +268,9 @@ $(function() {
           $messageTitle.text('Oops...');
           if (xhr.responseText) {
             // use message sent by server
-//            $messageSubline.text(xhr.responseText);
-            var win = window.open("", "Title", "toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=780, height=200, top="+(screen.height-400)+", left="+(screen.width-840));
-            win.document.body.innerHTML = xhr.responseText;
+            $messageSubline.text(xhr.responseText);
+//            var win = window.open("", "Title", "toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=780, height=200, top="+(screen.height-400)+", left="+(screen.width-840));
+//            win.document.body.innerHTML = xhr.responseText;
 
           } else {
             // use generic message
@@ -389,7 +390,7 @@ $(function() {
           price: price,
           size: size,
           quantity: 1,
-          color: 'G'
+          color: 'B'
         });
       });
 
