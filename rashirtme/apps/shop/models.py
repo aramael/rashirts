@@ -55,7 +55,6 @@ class Order(models.Model):
         return order
     order_pretty.allow_tags = True
     order_pretty.short_description = 'Order'
-    order_pretty = property(order_pretty)
 
     def shirt_count(self):
 
@@ -83,7 +82,7 @@ class Order(models.Model):
         msg.send()
 
     def receipt_email_message(self, subject_template='email/receipt_delivery_subject.txt',
-                              email_template='email/invite_email.html', extra_context=None):
+                              email_template='email/receipt_delivery.html', extra_context=None):
 
         ch = stripe.Charge.retrieve(self.stripe_token)
 
@@ -92,7 +91,7 @@ class Order(models.Model):
             'name': self.name,
             'date': self.purchase_time,
             'price': ch.amount/100.00,
-            'order_pretty': self.order_pretty,
+            'order_pretty': self.order_pretty(),
         }
 
         if extra_context is not None:
@@ -114,4 +113,38 @@ class Order(models.Model):
         """
 
         subject, email = self.receipt_email_message(*args, **kwargs)
+        self.mail_customer(subject, email)
+
+    def pickup_email_message(self, subject_template='email/item_pickup_subject.txt',
+                             email_template='email/item_pickup.html', extra_context=None):
+
+        #ch = stripe.Charge.retrieve(self.stripe_token)
+
+        context = {
+            'email': self.email,
+            'name': self.name,
+            'date': self.purchase_time,
+            #'price': ch.amount/100.00,
+            'order_pretty': self.order_pretty(),
+        }
+
+        if extra_context is not None:
+            context.update(extra_context)
+
+        subject = loader.render_to_string(subject_template, context)
+        # Email subject *must not* contain newlines
+        subject = ''.join(subject.splitlines())
+
+        context.update({'subject': subject})
+
+        email = loader.render_to_string(email_template, context)
+
+        return subject, email
+
+    def send_pickup(self, *args, **kwargs):
+        """
+        Send out an email customer with a receipt for the purchase.
+        """
+
+        subject, email = self.pickup_email_message(*args, **kwargs)
         self.mail_customer(subject, email)
