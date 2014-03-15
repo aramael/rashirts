@@ -58,7 +58,6 @@ class OrderForm(forms.ModelForm):
 
         shirts = 0
         for item in json.loads(data['order']):
-            print item
             shirts += int(item['quantity'])
 
         data['amount_due'] = shirts * settings.SHIRT_PRICE*100
