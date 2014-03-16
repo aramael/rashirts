@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ subject }}</title>
+</head>
+<body>
+Dear {{ name }}:
+
+Your order is ready for pickup. If you have any
+questions, please contact us anytime at <a href="mailto:shop@rashirt.mem">shop@rashirt.me</a>. Thank you
+for your business!
+
+
+-------------------------------------------------
+RA Shirt Me RECEIPT - {{ date|date:"d M Y - H:Mi" }}
+
+Name: {{ name }}
+Order: {{ order_pretty|safe }}
+Amount: USD ${{ price }}*
+
+
+RA Shirt Me, Inc.
+2828 Broadway
+New York, NY 10025
+
+* EU customers: prices exclude VAT
+-------------------------------------------------
+</body>
+</html>

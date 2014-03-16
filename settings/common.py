@@ -56,6 +56,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'south',
     'gunicorn',
+    'rashirtme.apps.shop',
 )
 
 #==============================================================================
@@ -150,6 +151,7 @@ MIDDLEWARE_CLASSES = (
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'rashirtme.wsgi.application'
 
+SHIRT_PRICE = 20
 
 #==============================================================================
 # Logging
