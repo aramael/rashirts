@@ -1,3 +1,5 @@
+import os
+
 from fabric.api import *
 
 
@@ -17,8 +19,8 @@ def staging():
 def production():
     env.env = 'production'
     env.settings = 'settings.production'
-    env.remote = 'production'
-    env.heroku_app = 'production'
+    env.remote = 'heroku'
+    env.heroku_app = 'rashirtme'
 
 
 # Default Environment
@@ -52,7 +54,7 @@ def collectstatic():
     else:
         print '\nCOLLECT STATIC aborted'
 
-def open():
+def start():
     if env.env == 'development':
         local('/usr/bin/open \'http://127.0.0.1:8000/\'')
         local('python manage.py runserver')
@@ -60,6 +62,8 @@ def open():
         local('heroku open --app {heroku_app}'.format(**env))
 
 # === DB ===
+
+
 def resetdb():
     if env.env == 'development':
         local('python manage.py syncdb --settings={settings}'.format(**env))
@@ -126,3 +130,20 @@ def set(key=None, value=None):
         local('heroku config:add {}={} --app {heroku_app}'.format(key, value, **env))
     else:
         print '\nErr!'
+
+
+def provision():
+
+    site_root, filename = os.path.split(os.path.abspath(__file__))
+
+    filename = env.env + '.env'
+
+    file_path = os.path.join(site_root, 'settings', filename)
+
+    with open(file_path) as fp:
+        for line in fp:
+            key, value = line.split('=')
+            value = value.strip()
+
+            if value != '':
+                set(key, value)
