@@ -148,7 +148,7 @@
 
   <script>
       var stripeKey = '{{ stripe_publishable_key|escapejs }}';
-    var _STATIC_URL = "{{ STATIC_URL|escapejs }}";
+    var _STATIC_URL = "{% static '' %}";
   </script>
 {#  <script src="{% static 'js/shop.min.js' %}"></script>#}
   <script src="{% static 'js/underscore.min.js' %}"></script>
