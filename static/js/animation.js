@@ -7,6 +7,7 @@ $(function() {
     { url: 'alma_day.jpg', left: '33%', right: '33%' },
     { url: 'alma_wide_angle_low_day.jpg', left: '33%', right: '33%' },
     { url: 'alma_close_up.jpg', left: '33%', right: '33%' },
+    { url: 'alma_low_day.jpg', left: '33%', right: '33%' }
   ];
 
   var userSelected = false;
