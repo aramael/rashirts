@@ -146,7 +146,10 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script src="https://checkout.stripe.com/v3/checkout.js"></script>
 
-  <script>var stripeKey = '{{ stripe_publishable_key }}';</script>
+  <script>
+      var stripeKey = '{{ stripe_publishable_key|escapejs }}';
+    var _STATIC_URL = "{{ STATIC_URL|escapejs }}";
+  </script>
 {#  <script src="{% static 'js/shop.min.js' %}"></script>#}
   <script src="{% static 'js/underscore.min.js' %}"></script>
   <script src="{% static 'js/spin.min.js' %}"></script>
