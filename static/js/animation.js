@@ -1,5 +1,5 @@
 $(function() {
-  var SHOWCASE_IMAGE_PREFIX = '/static/images/showcase/';
+  var SHOWCASE_IMAGE_PREFIX = _STATIC_URL + 'images/showcase/';
   var backgroundImage = new Image();
 
   // possible a random showcase image to use
@@ -115,13 +115,13 @@ $(function() {
   });
 
   // preload images to prevent them from appearing mid-animation
-  var preload = ['/static/images/flying-shirt.png',
-                 '/static/images/flying-shirt@2x.png',
-                 '/static/images/success.png',
-                 '/static/images/success@2x.png'];
+  var preload = ['images/flying-shirt.png',
+                 'images/flying-shirt@2x.png',
+                 'images/success.png',
+                 'images/success@2x.png'];
   for (var i = 0; i < preload.length; i++) {
     var img = new Image();
-    img.src = preload[i];
+    img.src = _STATIC_URL + preload[i];
   }
 
   /* Performs a bounce animation on the given element.
