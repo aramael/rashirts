@@ -36,6 +36,9 @@ SESSION_COOKIE_SECURE = True
 # browsers may ensure that the cookie is only sent under an HTTPS connection.
 CSRF_COOKIE_SECURE = True
 
+# See https://docs.djangoproject.com/en/1.6/ref/settings/#secure-proxy-ssl-header
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 #==============================================================================
 # Payment Processing
 #==============================================================================
