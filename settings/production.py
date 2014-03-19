@@ -36,10 +36,6 @@ SESSION_COOKIE_SECURE = True
 # browsers may ensure that the cookie is only sent under an HTTPS connection.
 CSRF_COOKIE_SECURE = True
 
-MIDDLEWARE_CLASSES += (
-    'sslify.middleware.SSLifyMiddleware',
-)
-
 #==============================================================================
 # Payment Processing
 #==============================================================================
