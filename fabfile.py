@@ -85,6 +85,11 @@ def resetdb():
             print '\nRESET DATABASE aborted'
 
 
+def createdb(app_names):
+    local('python manage.py schemamigration {} --initial --settings={settings}'.format(app_names, **env))
+    migrate()
+
+
 def schemamigration(app_names):
     local('python manage.py schemamigration {} --auto --settings={settings}'.format(app_names, **env))
 
