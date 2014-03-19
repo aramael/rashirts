@@ -36,9 +36,12 @@ SESSION_COOKIE_SECURE = True
 # browsers may ensure that the cookie is only sent under an HTTPS connection.
 CSRF_COOKIE_SECURE = True
 
-MIDDLEWARE_CLASSES += (
-    'sslify.middleware.SSLifyMiddleware',
-)
+# See https://docs.djangoproject.com/en/1.6/ref/settings/#secure-proxy-ssl-header
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# Whether to expire the session when the user closes his or her browser. See
+# https://docs.djangoproject.com/en/1.6/topics/http/sessions/#browser-length-vs-persistent-sessions
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 #==============================================================================
 # Payment Processing
