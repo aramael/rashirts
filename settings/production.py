@@ -25,6 +25,22 @@ ALLOWED_HOSTS = ['.herokuapp.com', '.rashirt.me']
 SECRET_KEY = os.environ['SECRET_KEY']
 
 #==============================================================================
+# SSL Processing
+#==============================================================================
+
+# If this is set to True, the cookie will be marked as 'secure,' which means
+# browsers may ensure that the cookie is only sent under an HTTPS connection.
+SESSION_COOKIE_SECURE = True
+
+# If this is set to True, the cookie will be marked as 'secure' which means
+# browsers may ensure that the cookie is only sent under an HTTPS connection.
+CSRF_COOKIE_SECURE = True
+
+MIDDLEWARE_CLASSES += (
+    'sslify.middleware.SSLifyMiddleware',
+)
+
+#==============================================================================
 # Payment Processing
 #==============================================================================
 
