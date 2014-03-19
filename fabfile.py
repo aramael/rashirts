@@ -28,6 +28,7 @@ development()
 
 # === Hotfix's ===
 
+
 def start_hotfix(name):
     local('git checkout -b hotfix-{name}'.format(name=name))
 
@@ -40,7 +41,8 @@ def close_hotfix(name):
     local('git branch -d hotfix-{name}'.format(name=name))
 
 # === Deployment ===
-# === Deployment ===
+
+
 def deploy():
     local('git push origin --all')
     local('git push {remote}'.format(**env))
@@ -48,11 +50,13 @@ def deploy():
     collectstatic()
     local('heroku open --app {heroku_app}'.format(**env))
 
+
 def collectstatic():
     if raw_input('\nDo you really want to COLLECT STATIC of {heroku_app}? YES or [NO]: '.format(**env)) == 'YES':
         local('heroku run python manage.py collectstatic --settings={settings}  --app {heroku_app}'.format(**env))
     else:
         print '\nCOLLECT STATIC aborted'
+
 
 def start():
     if env.env == 'development':
