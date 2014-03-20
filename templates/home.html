@@ -13,6 +13,8 @@
     <meta property="og:type" content="product"/>
 
 	<!-- CSS -->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+	<link rel="stylesheet"  media="screen" href="{% tatic "css/tooltip.css" %}" />
 	<link rel="stylesheet"  media="screen" href="{% static "css/shop.min.css" %}" />
 </head>
 
@@ -94,7 +96,10 @@
 			<div class="displayed-items">
 				<div class="item left">
 					<p class="price item_price"><span>$</span>{{ shirt_price }}</p>
-					<p class="name item_name">Lacrosse Tank</p>
+					<p class="name">
+                        <span class="item_name">Lacrosse Tank</span>
+                        <a data-popup-name="Lacrosse_Tank_Sizing" data-popup-options="width=700,height=700,scrollbars=yes,toolbar=yes,menubar=no,location=yes,resizable=yes" rel="popup" data-toggle="tooltip" data-placement="right" title="Sizing Information" href="http://www.customink.com/items/sizing/187800_lineup/standard.htm"><i class="fa fa-info-circle"></i></a>
+                    </p>
 					<div class="size">
 						<div class="shim-select"><span class="label">Select Size</span> <div class="arrows"></div></div>
 						<select name="size">
@@ -110,7 +115,10 @@
 
 				<div class="item right">
 					<p class="price item_price"><span>$</span>{{ shirt_price }}</p>
-					<p class="name item_name">Women's Tank</p>
+					<p class="name">
+                        <span class="item_name">Women's Tank</span>
+                        <a  data-popup-name="Womens_Tank_Sizing" data-popup-options="width=700,height=700,scrollbars=yes,toolbar=yes,menubar=no,location=yes,resizable=yes" rel="popup"  data-toggle="tooltip" data-placement="right" title="Sizing Information" href="http://www.customink.com/items/sizing/177000_lineup/standard.htm"><i class="fa fa-info-circle"></i></a>
+                    </p>
 					<div class="size">
 						<div class="shim-select"><span class="label">Select Size</span> <div class="arrows"></div></div>
 						<select name="size">
@@ -162,6 +170,8 @@
 	<script src="{% static 'js/bag.js' %}"></script>
 	<script src="{% static 'js/ga.js' %}"></script>
 	<script src="{% static 'js/requestanimationframe.js' %}"></script>
+	<script src="{% static 'js/tooltip.min.js' %}"></script>
+	<script src="{% static 'js/popup.js' %}"></script>
 	<script src="{% static 'js/shop.js' %}"></script>
 
 </body>

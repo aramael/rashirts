@@ -14,6 +14,11 @@ $(function() {
   var $bagCount = $('.count .number');
   var $bagTotal = $('.total .value');
 
+  $('.displayed-items').tooltip({
+    selector: '[data-toggle=tooltip]',
+    container: 'body'
+  });
+
   var bag = new Bag({
     addHandler: function(items) {
       // render everything and show bag
